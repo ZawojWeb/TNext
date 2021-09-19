@@ -23,7 +23,6 @@ export const Layout = ({title,keywords,description, children}) => {
             <main>
                 <div className={styles.container}>
                     {children}
-                    
                 </div>
             </main>
             <Footer/>
