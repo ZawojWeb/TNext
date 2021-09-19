@@ -1,8 +1,10 @@
+import { Layout } from "../components/Layout"
+
 const AboutPage = () => {
     return (
-        <div>
+        <Layout title="About DJ Events">
             <h1>About page</h1>
-        </div>
+        </Layout>
     )
 }
 
