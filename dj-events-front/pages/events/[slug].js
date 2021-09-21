@@ -28,7 +28,7 @@ const MyEventPage = ({evt}) => {
                 <h1>{evt.name}</h1>
                 {evt.image && (
                     <div className={styles.image}>
-                        <Image src={evt.image} width={960} height={600}/>
+                        <Image src={evt.image.formats.medium.url} width={960} height={600}/>
                     </div>
                 )}
                 <h3>Performers: </h3>
@@ -50,7 +50,7 @@ export default MyEventPage
 
 export async function getServerSideProps({query : {slug}}) {
 
-    const res = await fetch(`${API_URL}/api/events/${slug}`)
+    const res = await fetch(`${API_URL}/events?slug=${slug}`)
     const events = await res.json();
 
     return{
