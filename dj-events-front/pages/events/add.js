@@ -58,8 +58,7 @@ const AddEventPage = () => {
         <Layout title="Add event">
             <Link href="/events">Go Back</Link>
             <h1>Add event page</h1>
-            <ToastContainer />
-
+            <ToastContainer/>
             <form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.grid}>
           <div>
