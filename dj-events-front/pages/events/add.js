@@ -39,7 +39,9 @@ const AddEventPage = () => {
         })
 
         if(!res.ok){
-            toast.error("Somethink Went Wrong")
+            if(!hasEmptyFields){
+              toast.error("Somethink Went Wrong")
+            }
         }else{
             const evt = await res.json()
             router.push(`/events/${evt.slug}`)
