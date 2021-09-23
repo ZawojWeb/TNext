@@ -5,6 +5,7 @@ import { Layout } from "@/components/Layout";
 import 'react-toastify/dist/ReactToastify.css'
 import Link from "next/link";
 import styles from '@/styles/AuthForm.module.css'
+import AuthContext from "@/context/AuthContext";
 
 
 const Register = () => {
@@ -14,6 +15,9 @@ const Register = () => {
     const [password, setPassword] = useState('')
     const [passwordConfirm, setPasswordConfirm] = useState('')
 
+    const {register, error} = useContext(AuthContext)
+
+
     const handlerSubmit = (e) => {
         e.preventDefault();
 
@@ -22,7 +26,7 @@ const Register = () => {
             return
         }
 
-        console.log({userName, email, password});
+        register({userName, email, password});
     }
 
     return (
