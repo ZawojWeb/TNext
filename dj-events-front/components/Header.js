@@ -26,7 +26,7 @@ export const Header = () => {
                         <> 
                             <li><Link href="/events/add"><a>Add Event</a></Link></li>
                             <li><Link href="/account/dashboard"><a>Dashboard</a></Link></li>
-                            <li><button onClick={() => logout} className="btn-secondary btn-icon"> <FaSignOutAlt/>Logout</button></li>
+                            <li><button onClick={logout} className="btn-secondary btn-icon"> <FaSignOutAlt/>Logout</button></li>
                         </>
                      : 
                         // if logout
