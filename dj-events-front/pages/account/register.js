@@ -53,10 +53,10 @@ const Register = () => {
                         <label htmlFor="passwordConfirm">Confirm Password</label>
                         <input type="password" id="passwordConfirm" value={passwordConfirm} onChange={(e) => {setPasswordConfirm(e.target.value)}} />
                     </div>
-                    <input type="submit" value="Login" className="btn" />
+                    <input type="submit" value="Register" className="btn" />
                 </form>
 
-                <p>Already have a account? <Link href="/account/login" >Login</Link></p>
+                <p>Already have a account? <Link href="/account/login" >Register</Link></p>
             </div>
         </Layout>
     )
