@@ -10,13 +10,14 @@ import AuthContext from "@/context/AuthContext";
 
 const Register = () => {
 
-    const [userName, setUserName] = useState('')
+    const [username, setUserName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirm, setPasswordConfirm] = useState('')
 
     const {register, error} = useContext(AuthContext)
 
+    useEffect(() => error && toast.error(error))
 
     const handlerSubmit = (e) => {
         e.preventDefault();
@@ -26,7 +27,7 @@ const Register = () => {
             return
         }
 
-        register({userName, email, password});
+        register({username, email, password});
     }
 
     return (
@@ -38,7 +39,7 @@ const Register = () => {
                 <form onSubmit={handlerSubmit}>
                     <div>
                         <label htmlFor="userName">Name</label>
-                        <input type="text" id="userName" value={userName} onChange={(e) => {setUserName(e.target.value)}} />
+                        <input type="text" id="userName" value={username} onChange={(e) => {setUserName(e.target.value)}} />
                     </div>
                     <div>
                         <label htmlFor="email">Email</label>
