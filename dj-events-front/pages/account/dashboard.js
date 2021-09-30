@@ -3,16 +3,37 @@ import { Layout } from "@/components/Layout"
 import { API_URL } from "@/config/index"
 import { parseCookies } from "@/helpers/index"
 import styles from '@/styles/Dashboard.module.css'
+import { useRouter } from "next/router"
+import { ToastContainer, toast } from 'react-toastify';
 
-const DashboardPage = ({events}) => {
-    const deleteEvent = (id) =>{
-        console.log(id)
+const DashboardPage = ({events,token}) => {
+    const router = useRouter()
+
+    const deleteEvent = async (id) =>{
+        if(confirm("Are you sure?")){
+
+            const res = await fetch(`${API_URL}/events/${id}`, {
+                method: "DELETE",
+                headers:{
+                    Authorization: `Bearer ${token}`
+                }
+            })
+
+            const data =await res.json();
+
+            if(!res.ok){
+                toast.error(data.message)
+            }else{
+                router.reload()
+            }
+        }
     }
     return (
         <Layout title="User Dashboard">
             <div className={styles.dash}>
                 <h1>Dashboard</h1>
                 <h3>My events</h3>
+                <ToastContainer/>
                 {events.map((evt) => (
                     <DashboardEvent key={evt.id} evt={evt} handleDelete={deleteEvent}/>
                 ))}
@@ -37,7 +58,8 @@ export async function getServerSideProps({req}){
     
     return {
         props:{
-            events
+            events,
+            token
         },
     }
 }

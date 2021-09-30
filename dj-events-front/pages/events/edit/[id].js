@@ -12,10 +12,10 @@ import Image from 'next/image'
 import { FaImage } from "react-icons/fa"
 import Modal from "@/components/Modal"
 import ImageUpload from "@/components/ImageUpload"
+import { parseCookies } from "@/helpers/index"
 
-const EditEventPage = ({evt}) => {
+const EditEventPage = ({evt, token}) => {
 
-    console.log(evt);
     const [values, setValues] = useState({
         name: evt.name,
         performers: evt.performers,
@@ -43,7 +43,8 @@ const EditEventPage = ({evt}) => {
         const res = await fetch(`${API_URL}/events/${evt.id}`, {
             method: 'PUT',
             headers: {
-                'Content-Type' : 'application/json'
+                'Content-Type' : 'application/json',
+                Authorization: `Bearer ${token}`
             },
             body: JSON.stringify(values)
         })
@@ -163,7 +164,7 @@ const EditEventPage = ({evt}) => {
         </div>
         
         <Modal show={ShowModal} onClose={()=>{setShowModal(false)}}>
-            <ImageUpload evtId={evt.id} imageUploaded={imageUploaded}/>
+            <ImageUpload evtId={evt.id} imageUploaded={imageUploaded} token={token} />
         </Modal>
         </Layout>
     )
@@ -177,9 +178,12 @@ export async function getServerSideProps({params: {id}, req}) {
     const res = await fetch(`${API_URL}/events/${id}`);
     const evt =  await res.json();
 
-    console.log(req.headers.cookie);
+    const {token} = parseCookies(req)
 
     return {
-        props:{ evt }
+        props:{ 
+          evt,
+          token
+         }
     }
 }

@@ -6,7 +6,10 @@ import { API_URL } from "@/config/index"
 import styles from '@/styles/Form.module.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
-const AddEventPage = () => {
+import { parseCookies } from "@/helpers/index"
+
+
+const AddEventPage = ({token}) => {
 
     const [values, setValues] = useState({
         name: '',
@@ -32,7 +35,8 @@ const AddEventPage = () => {
         const res = await fetch(`${API_URL}/events`, {
             method: 'POST',
             headers: {
-                'Content-Type' : 'application/json'
+                'Content-Type' : 'application/json',
+                Authorization : `Bearer ${token}`
             },
             body: JSON.stringify(values)
         })
@@ -140,3 +144,13 @@ const AddEventPage = () => {
 }
 
 export default AddEventPage
+
+export async function getServerSideProps({req}){
+  const {token} = parseCookies(req)
+
+  return {
+    props:{
+      token
+    }
+  }
+}
