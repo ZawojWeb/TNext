@@ -22,6 +22,10 @@ const ImageUpload = ({evtId, imageUploaded, token}) => {
             body: formData,
         })
 
+
+
+
+    
         if(res.ok){
             imageUploaded();
         }
