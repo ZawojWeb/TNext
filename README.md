@@ -1,2 +1,6 @@
 # Blog in next
- This is project where I create the blog with next and strapi CMS
+ In this project I creat the blog with functionality:
+  - Create Account
+  - Singin
+  - Adding posts
+  - Implement Strapi CMS
